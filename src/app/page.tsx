@@ -1,16 +1,18 @@
 "use client";
 
+import { useTheme } from '@/context/ThemeContext';
 import LoadingMiddleware from '@/middleware/LoadingMiddleware';
 import React, { useState } from 'react';
 
 const Page: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const triggerLoading = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 10000);
+    }, 3000);
   };
 
   return (
@@ -23,6 +25,9 @@ const Page: React.FC = () => {
         >
           Trigger Loading
         </button>
+      </div>
+      <div className="">
+
       </div>
     </LoadingMiddleware>
   );

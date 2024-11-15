@@ -1,8 +1,9 @@
+import { ThemeProvider } from '@/context/ThemeContext';
 import LoadingMiddleware from '@/middleware/LoadingMiddleware';
 import React from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import "./globals.css";
+import './globals.css';
 
 export default function RootLayout({
   children,
@@ -12,11 +13,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <LoadingMiddleware>
-          <main>{children}</main>
-        </LoadingMiddleware>
-        <Footer />
+        <ThemeProvider>
+          <Navbar />
+          <LoadingMiddleware>
+            <main className="pt-20">{children}</main>
+          </LoadingMiddleware>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -31,7 +31,9 @@ const LoadingMiddleware: React.FC<Props> = ({
         right: 0,
         bottom: 0,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor: "rgba(255, 255, 255, 0.7)",
+        transition: "opacity 1000ms ease-in-out",
       }}
     >
       <div className="flex space-x-4">
