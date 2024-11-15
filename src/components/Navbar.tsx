@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <nav className={`fixed w-full z-20 top-0 left-0 p-1 ${
       theme === "light" 
-        ? "bg-gray-100/20 backdrop-blur-sm" 
+        ? "bg-gray-200/30 backdrop-blur-sm" 
         : "bg-white/5 backdrop-blur-sm"
     }`}>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -32,7 +32,7 @@ const Navbar = () => {
           <ul className={`flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ${
             theme === "light" ? "" : "text-white"
           }`}>
-            {['Home', 'About', 'Projects', 'Contact'].map((item) => (
+            {['About Me', 'Projects', 'Contact'].map((item) => (
               <li key={item}>
                 <Link
                   href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}

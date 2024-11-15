@@ -14,7 +14,7 @@ const ThemedLayout = ({ children }: { children: React.ReactNode }) => {
     <body className={theme === 'light' ? 'bg-white' : 'bg-[#151515]'}>
       <Navbar />
       <LoadingMiddleware>
-        <main className="h-screen">{children}</main>
+        <main className="h-[400svh]">{children}</main>
       </LoadingMiddleware>
       <Footer />
     </body>
