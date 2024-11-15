@@ -10,16 +10,19 @@ const Navbar = () => {
   const { theme } = useTheme();
 
   return (
-    <nav className="border-b border-border fixed w-full z-20 top-0 left-0">
+    <nav className={`fixed w-full z-20 top-0 left-0 p-1 ${
+      theme === "light" 
+        ? "bg-gray-100/20 backdrop-blur-sm" 
+        : "bg-white/5 backdrop-blur-sm"
+    }`}>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center">
-          <span className={`self-center text-2xl font-semibold whitespace-nowrap text-foreground ${
-              theme === "light" ? "text-black" : "text-white"
-            }`}>
-            Weeranut
+          <span className={`self-center text-xl font-semibold whitespace-nowrap text-foreground ${
+            theme === "light" ? "" : "text-white"
+          }`}>
+            Weeranut's Portfolio
           </span>
         </Link>
-
         <div
           className={`items-center justify-between w-full md:flex md:w-auto md:order-1 gap-5 ${
             isOpen ? 'block' : 'hidden'
@@ -27,8 +30,8 @@ const Navbar = () => {
           id="navbar-sticky"
         >
           <ul className={`flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 ${
-              theme === "light" ? "" : "text-white"
-            }`}>
+            theme === "light" ? "" : "text-white"
+          }`}>
             {['Home', 'About', 'Projects', 'Contact'].map((item) => (
               <li key={item}>
                 <Link

@@ -1,5 +1,5 @@
 "use client";
-
+import { useTheme } from "@/context/ThemeContext";
 import { Loader } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
@@ -14,6 +14,7 @@ const LoadingMiddleware: React.FC<Props> = ({
   isLoading = false,
 }) => {
   const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -32,13 +33,26 @@ const LoadingMiddleware: React.FC<Props> = ({
         bottom: 0,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "rgba(255, 255, 255, 0.7)",
+        backgroundColor: theme === "light" ? "rgba(255, 255, 255, 0.8)" : "rgba(100, 100, 100, 0.5)",
         transition: "opacity 1000ms ease-in-out",
       }}
     >
-      <div className="flex space-x-4">
-        <Loader className="w-16 h-16 animate-spin text-blue-500" />
-        <div className="text-gray-700 text-xl font-medium leading-none">
+      <div className="flex flex-col space-x-4 gap-3 items-center">
+        <Loader 
+          className="animate-spin" 
+          style={{
+            color: theme === "light" ? "#374151" : "#E5E7EB",
+            height: "4rem",
+            width: "4rem",
+          }}
+        />
+        <div 
+          className={`font-medium leading-none`}
+          style={{
+            color: theme === "light" ? "#374151" : "#E5E7EB",
+            fontSize: "1.25rem",
+          }}
+        >
           Loading...
         </div>
       </div>

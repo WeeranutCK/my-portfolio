@@ -1,9 +1,25 @@
-import { ThemeProvider } from '@/context/ThemeContext';
+"use client";
+
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
+import { ThemeProvider, useTheme } from '@/context/ThemeContext';
 import LoadingMiddleware from '@/middleware/LoadingMiddleware';
 import React from 'react';
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
 import './globals.css';
+
+const ThemedLayout = ({ children }: { children: React.ReactNode }) => {
+  const { theme } = useTheme();
+
+  return (
+    <body className={theme === 'light' ? 'bg-white' : 'bg-[#151515]'}>
+      <Navbar />
+      <LoadingMiddleware>
+        <main className="h-screen">{children}</main>
+      </LoadingMiddleware>
+      <Footer />
+    </body>
+  );
+};
 
 export default function RootLayout({
   children,
@@ -12,15 +28,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <ThemeProvider>
-          <Navbar />
-          <LoadingMiddleware>
-            <main className="pt-20">{children}</main>
-          </LoadingMiddleware>
-          <Footer />
-        </ThemeProvider>
-      </body>
+      <ThemeProvider>
+        <ThemedLayout>{children}</ThemedLayout>
+      </ThemeProvider>
     </html>
   );
 }
