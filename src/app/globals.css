@@ -5,12 +5,6 @@
 
 :root {
   --font-family: 'Inter', sans-serif;
-  
-  /* Theme Colors */
-  --color-1: #635985;
-  --color-2: #443C68;
-  --color-3: #393053;
-  --color-4: #18122B;
 }
 
 * {
@@ -25,13 +19,6 @@
 
 @layer base {
   :root {
-    /* Your theme colors */
-    --theme-1: 99 89 133; /* #635985 in RGB */
-    --theme-2: 68 60 104; /* #443C68 in RGB */
-    --theme-3: 57 48 83;  /* #393053 in RGB */
-    --theme-4: 24 18 43;  /* #18122B in RGB */
-
-    /* Light theme */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     
@@ -62,9 +49,8 @@
 
     --radius: 0.5rem;
   }
- 
+
   .dark {
-    /* Dark theme */
     --background: var(--theme-4);
     --foreground: 210 40% 98%;
     
@@ -102,4 +88,39 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #cccccc;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.1);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.1);
+  background-color: #666666;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cccccc transparent;
+}
+
+.dark .custom-scrollbar {
+  scrollbar-color: #666666 transparent;
 }

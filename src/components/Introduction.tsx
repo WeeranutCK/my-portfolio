@@ -9,9 +9,9 @@ import { GoProjectRoadmap } from 'react-icons/go';
 
 export const Introduction: React.FC = () => {
   const { theme } = useTheme();
-  
+
   return (
-    <div className="flex justify-evenly items-center h-1/4 gap-20">
+    <div className="flex justify-evenly items-center h-1/2 gap-20">
       <div className="flex flex-col justify-center items-start gap-3 font-bold">
         <div className="text-3xl">My name is</div>
         <div className="text-5xl font-black">
