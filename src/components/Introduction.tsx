@@ -64,7 +64,7 @@ export const Introduction: React.FC = () => {
         </div>
         <div className="py-2">Last Update: 16 Nov 2024 02:49 AM</div>
       </div>
-      <div className="flex flex-col justify-center items-center">
+      <div className="relative flex justify-center items-center">
         <Image
           src="/profile-image.jpeg"
           alt="weeranut's profile picture"

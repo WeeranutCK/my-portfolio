@@ -42,6 +42,14 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="https://www.canva.com/design/DAGL9n8y1LY/CVdwGXhPNFFVuh_KN_wIDQ/view?utm_content=DAGL9n8y1LY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=UNAVAILABLE"
+                className="block py-2 pl-3 pr-4 rounded hover:bg-accent md:hover:bg-transparent md:hover:text-primary md:p-0 transition-colors duration-200"
+              >
+                Resume
+              </Link>
+            </li>
           </ul>
           <ThemeToggle />
         </div>
