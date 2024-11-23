@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useTheme } from '@/context/ThemeContext';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { FaGithub } from 'react-icons/fa';
-import { GoProjectRoadmap } from 'react-icons/go';
+import { useTheme } from "@/context/ThemeContext";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { FaGithub } from "react-icons/fa";
+import { GoProjectRoadmap } from "react-icons/go";
 
 export const Introduction: React.FC = () => {
   const { theme } = useTheme();
@@ -31,7 +31,7 @@ export const Introduction: React.FC = () => {
           Computer Science Student at Kasetsart University, 2022 - Present
         </div>
         <div className="font-medium pt-3">
-          Interest in Web Development and Machine Learning
+          Interest in Web - Mobile Application Development and Machine Learning
         </div>
         <div className="flex gap-5">
           <button
@@ -62,7 +62,7 @@ export const Introduction: React.FC = () => {
             </button>
           </Link>
         </div>
-        <div className="py-2">Last Update: 16 Nov 2024 02:49 AM</div>
+        <div className="py-2">Last Update: 23 Nov 2024 04:56 PM</div>
       </div>
       <div className="relative flex justify-center items-center">
         <Image
