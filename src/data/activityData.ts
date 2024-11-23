@@ -8,6 +8,8 @@ const activityData: Activity[] = [
     images: [
       "/activities/icpc-2024/icpc-2024-1.jpg",
       "/activities/icpc-2024/icpc-2024-2.jpg",
+      "/activities/icpc-2024/icpc-2024-3.jpg",
+      "/activities/icpc-2024/icpc-2024-4.jpg",
     ],
     imageCredit: {
       name: "ACM ICPC Thailand",

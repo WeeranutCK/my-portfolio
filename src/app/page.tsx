@@ -6,7 +6,7 @@ import React from 'react';
 
 const Page: React.FC = () => {
   return (
-    <div className="flex flex-col justify-start items-center w-full h-full">
+    <div className="flex flex-col justify-start items-center w-full h-[200svh] ">
       <Introduction />
       <Activities />
     </div>
