@@ -1,35 +1,35 @@
-"use client";
+'use client';
 
-import { Project } from "@/types/project";
-import Link from "next/link";
-import { FiExternalLink, FiFigma, FiGithub } from "react-icons/fi";
+import { Project } from '@/types/project';
+import Link from 'next/link';
+import { FiExternalLink, FiFigma, FiGithub } from 'react-icons/fi';
 
 export const ProjectLink = ({ project }: { project: Project }) => {
   const links = [
     {
       url: project.githubUrl,
       Icon: FiGithub,
-      label: "Github",
+      label: 'Github',
     },
     {
       url: project.figmaUrl,
       Icon: FiFigma,
-      label: "Figma",
+      label: 'Figma',
     },
     {
       url: project.liveUrl,
       Icon: FiExternalLink,
-      label: "Application",
+      label: 'Application',
     },
     {
       url: project.presentationUrl,
       Icon: FiExternalLink,
-      label: "Presentation",
+      label: 'Presentation',
     },
   ];
 
   return (
-    <div className="flex flex-col gap-2 pt-1">
+    <div className="grid grid-cols-3 md:flex md:flex-col gap-2 pt-1">
       {links.map(
         ({ url, Icon, label }) =>
           url && (

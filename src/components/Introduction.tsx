@@ -11,7 +11,7 @@ export const Introduction: React.FC = () => {
   const { theme } = useTheme();
 
   return (
-    <div className="flex flex-col-reverse px-10 md:px-0 md:flex-row justify-evenly items-center h-1/2 gap-5 md:gap-20 pt-20 md:pt-0">
+    <div className="flex flex-col-reverse px-8 md:px-0 md:flex-row justify-evenly items-center h-1/2 gap-5 md:gap-20 pt-20 md:pt-0">
       <div className="flex flex-col justify-center items-start gap-2 md:gap-3 font-bold">
         <div className="text-lg md:text-3xl">My name is</div>
         <div className="text-xl md:text-5xl font-black">

@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { Project } from "@/types/project";
+import { Project } from '@/types/project';
 
 interface StatusBadgeProps {
-  status: Project["status"];
+  status: Project['status'];
 }
 
 const statusConfig = {
   online: {
-    color: "bg-green-500",
-    text: "Online",
+    color: 'bg-green-500',
+    text: 'Online',
   },
   offline: {
-    color: "bg-yellow-500",
-    text: "Offline",
+    color: 'bg-yellow-500',
+    text: 'Offline',
   },
   down: {
-    color: "bg-red-500",
-    text: "Down",
+    color: 'bg-red-500',
+    text: 'Down',
   },
 };
 

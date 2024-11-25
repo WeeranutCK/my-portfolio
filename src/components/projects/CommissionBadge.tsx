@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { Project } from "@/types/project";
+import { Project } from '@/types/project';
 
 interface CommissionBadgeProps {
-  commission: Project["commission"];
+  commission: Project['commission'];
 }
 
 export const CommissionBadge = ({ commission }: CommissionBadgeProps) => {
   const getBadgeClasses = (isCommission: boolean | undefined) => {
     return isCommission
-      ? "bg-purple-100 dark:bg-purple-900"
-      : "bg-blue-100 dark:bg-blue-900";
+      ? 'bg-purple-100 dark:bg-purple-900'
+      : 'bg-blue-100 dark:bg-blue-900';
   };
 
   return (
@@ -19,7 +19,7 @@ export const CommissionBadge = ({ commission }: CommissionBadgeProps) => {
         commission
       )}`}
     >
-      {commission ? "Commission" : "Personal"}
+      {commission ? 'Commission' : 'Personal'}
     </div>
   );
 };

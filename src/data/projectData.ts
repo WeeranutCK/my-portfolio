@@ -2,6 +2,16 @@ import { Project } from "@/types/project";
 
 const projects: Project[] = [
   {
+    id: "project-6",
+    title: "Tournament Management Website v1.0",
+    shortDescription: "A website that can handle tournament registration and management.",
+    date: "June 2024 - Present",
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    githubUrl: "https://github.com/CS471-Tournament-Website/tournament-website-front",
+    figmaUrl: "https://www.figma.com/design/tr1VJ6IcltUhb0g93zwvSG/se-pages-design?node-id=187-2446&t=3qFctfA6s9AbpeDf-1",
+    status: "offline",
+  },
+  {
     id: "project-5",
     title: "Tournament Management Website v1.0",
     shortDescription: "A website that can handle tournament registration and management.",
