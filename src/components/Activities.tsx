@@ -111,7 +111,7 @@ const ImageCredit = ({ credit }: { credit: Credit }) => {
   const { theme } = useTheme();
   
   return (
-    <div className="flex justify-end mt-auto">
+    <div className="flex justify-end mt-auto text-right">
       <span className={`text-xs italic ${
         theme === "light" ? "text-gray-500" : "text-gray-400"
       }`}>
@@ -139,11 +139,11 @@ const ImageCredit = ({ credit }: { credit: Credit }) => {
 const Activities = () => {
   const { theme } = useTheme();
   return (
-    <div className={`w-full h-1/2 p-14 ${
+    <div className={`w-full h-1/2 p-10 md:p-14 ${
       theme === "light" ? "bg-[#FAF9F6]" : "bg-[#1c1c1c]"
     }`}>
       <div className="max-w-[1400px] mx-auto h-full flex flex-col">
-        <div className="text-2xl font-bold mb-8">Recent Activities</div>
+        <div className="text-xl md:text-2xl font-bold mb-8">Recent Activities</div>
         <div className="flex-1 overflow-y-auto pr-4 custom-scrollbar">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6">
             {activityData.map((activity, index) => (
@@ -157,20 +157,20 @@ const Activities = () => {
               >
                 <ImageCarousel images={activity.images} />
                 <div className="flex flex-col flex-grow p-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-medium text-xl line-clamp-2">{activity.name}</h3>
-                    <span className={`pt-1 text-sm whitespace-nowrap ml-2 ${
-                      theme === "light" ? "text-gray-600" : "text-gray-400"
-                    }`}>
-                      {activity.date}
-                    </span>
-                  </div>
+                  <h3 className="font-medium text-lg md:text-xl line-clamp-3 md:line-clamp-2 mb-2">{activity.name}</h3>
                   <p className={`text-sm line-clamp-4 mb-2 ${
                     theme === "light" ? "text-gray-600" : "text-gray-400"
                   }`}>
                     {activity.description}
                   </p>
-                  <ImageCredit credit={activity.imageCredit} />
+                  <div className="mt-auto">
+                    <span className={`block text-sm text-right mb-1 ${
+                      theme === "light" ? "text-gray-600" : "text-gray-400"
+                    }`}>
+                      {activity.date}
+                    </span>
+                    <ImageCredit credit={activity.imageCredit} />
+                  </div>
                 </div>
               </div>
             ))}
