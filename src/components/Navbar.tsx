@@ -101,7 +101,7 @@ const Navbar = () => {
             <li>
               <Link
                 href="https://www.canva.com/design/DAGL9n8y1LY/CVdwGXhPNFFVuh_KN_wIDQ/view?utm_content=DAGL9n8y1LY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=UNAVAILABLE"
-                className={`block py-2 pl-3 pr-4 rounded ${
+                className={`block py-2 pr-4 rounded ${
                   theme === 'light' 
                     ? 'drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]' 
                     : 'drop-shadow-[0_1px_1px_rgba(255,255,255,0.25)]'
