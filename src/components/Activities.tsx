@@ -18,7 +18,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     if (!isHovered) {
       const timer = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % images.length);
-      }, 1000);
+      }, 2500);
       return () => clearInterval(timer);
     }
   }, [images.length, isHovered]);
@@ -157,7 +157,7 @@ const Activities = () => {
     setTimeout(() => {
       loadMoreActivities();
       setIsLoading(false);
-    }, 10000);
+    }, 2000);
   };
 
   const loadMoreActivities = () => {
