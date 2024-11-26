@@ -7,7 +7,6 @@ import { ProjectLink } from '@/components/projects/ProjectLink';
 import { StatusBadge } from '@/components/projects/StatusBadge';
 import projectData from '@/data/projectData';
 import { Project } from '@/types/project';
-import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
 
@@ -266,12 +265,12 @@ const ProjectsPage = () => {
                   className="group grid grid-cols-[2.5fr,1fr,0.4fr,0.6fr,1fr,0.75fr] gap-4 px-4 py-6 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors items-start"
                 >
                   <div className="space-y-2">
-                    <Link
-                      href={`/projects/${project.id}`}
-                      className="flex items-center gap-2 text-lg font-medium hover:text-blue-600 dark:hover:text-blue-400"
+                    <div
+                      // href={`/projects/${project.id}`} hover:text-blue-600 dark:hover:text-blue-400 
+                      className="text-lg font-medium mb-2 block"
                     >
                       {project.title}
-                    </Link>
+                    </div>
                     <p className="text-sm text-gray-600 dark:text-gray-300">
                       {project.shortDescription}
                     </p>
@@ -315,12 +314,12 @@ const ProjectsPage = () => {
                 key={project.id}
                 className="border rounded-lg p-4 mb-4 bg-white dark:bg-gray-800 shadow-sm"
               >
-                <Link
-                  href={`/projects/${project.id}`}
-                  className="text-lg font-medium hover:text-blue-600 dark:hover:text-blue-400 mb-2 block"
+                <div
+                  // href={`/projects/${project.id}`} hover:text-blue-600 dark:hover:text-blue-400 
+                  className="text-lg font-medium mb-2 block"
                 >
                   {project.title}
-                </Link>
+                </div>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
                   {project.shortDescription}
                 </p>
