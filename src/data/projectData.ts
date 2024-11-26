@@ -33,7 +33,7 @@ const projects: Project[] = [
   },
   {
     id: "project-2",
-    title: "KUSA Project - Student Activity Management System (First Phrase)",
+    title: "KUSA Project - Student Activity Management System (First Phase)",
     shortDescription: "A project that help clubs to open their activities and manage their activities with their requested student activity budget allocations.",
     date: "Nov 2023 - Mar 2024",
     technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
