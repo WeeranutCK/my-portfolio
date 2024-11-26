@@ -23,7 +23,7 @@ const LoadingMiddleware: React.FC<Props> = ({
 
   const LoadingOverlay = () => (
     <div
-      className="fixed inset-1 flex"
+      className="fixed inset-1 flex backdrop-blur-xl"
       style={{
         position: "fixed",
         zIndex: 9999,
@@ -33,11 +33,11 @@ const LoadingMiddleware: React.FC<Props> = ({
         bottom: 0,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: theme === "light" ? "rgba(255, 255, 255, 0.8)" : "rgba(100, 100, 100, 0.5)",
+        backgroundColor: theme === "light" ? "rgba(255, 255, 255, 0.8)" : "rgba(100, 100, 100, 0.8)",
         transition: "opacity 1000ms ease-in-out",
       }}
     >
-      <div className="flex flex-col space-x-4 gap-3 items-center">
+      <div className="flex flex-col space-x-4 gap-3 items-center drop-shadow-md">
         <Loader 
           className="animate-spin" 
           style={{

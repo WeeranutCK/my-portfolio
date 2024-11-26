@@ -3,7 +3,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
-import LoadingMiddleware from "@/middleware/LoadingMiddleware";
 import React, { useEffect, useState } from "react";
 import "./globals.css";
 
@@ -22,9 +21,7 @@ const ThemedLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={theme === 'light' ? 'bg-white' : 'bg-[#151515]'}>
       <Navbar />
-      <LoadingMiddleware>
-        <main>{children}</main>
-      </LoadingMiddleware>
+      <main>{children}</main>
       <Footer />
     </div>
   );

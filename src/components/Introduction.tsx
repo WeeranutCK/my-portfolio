@@ -11,14 +11,14 @@ export const Introduction: React.FC = () => {
   const { theme } = useTheme();
 
   return (
-    <div className="flex flex-col-reverse px-8 md:px-0 md:flex-row justify-evenly items-center h-1/2 gap-5 md:gap-20 pt-20 md:pt-0">
-      <div className="flex flex-col justify-center items-start gap-2 md:gap-3 font-bold">
-        <div className="text-lg md:text-3xl">My name is</div>
-        <div className="text-xl md:text-5xl font-black">
+    <div className="flex flex-col-reverse px-8 md:px-15 md:flex-row justify-evenly items-center min-h-[100svh] gap-5 md:gap-12 lg:gap-20 pt-20 lg:pt-0">
+      <div className="flex flex-col justify-center items-start gap-2 md:gap-3 font-bold lg:max-w-[50%]">
+        <div className="sm:text-base md:text-lg lg:text-3xl">My name is</div>
+        <div className="sm:text-lg md:text-xl lg:text-3xl font-black">
           Weeranut Chayakul
-          <span> (Nate)</span>
+          <span> (Nate)</span>  
         </div>
-        <div className="md:pt-2 text-sm md:text-lg flex items-center gap-2">
+        <div className="lg:pt-2 text-sm lg:text-lg flex items-center gap-2">
           <Image
             src="/location-pin.png"
             alt="location pin"
@@ -33,18 +33,20 @@ export const Introduction: React.FC = () => {
         <div className="font-medium text-sm md:text-base pt-3">
           Interest in Web - Mobile Application Development and Machine Learning
         </div>
-        <div className="flex gap-3 md:gap-5 text-xs md:text-base">
+        <div className="flex gap-3 md:gap-5 text-xs md:text-sm lg:text-lg">
           <button
             onClick={() => {}}
-            className={`mt-4 px-4 py-3 text-white font-semibold rounded flex items-center gap-2 ${
+            className={`mt-4 px-4 py-3 text-white font-semibold rounded flex items-center ${
               theme === 'dark'
                 ? 'bg-[#A91D3A] hover:bg-[#C73659]'
                 : 'bg-[#C73659] hover:bg-[#A91D3A]'
             }`}
           >
-            <GoProjectRoadmap className="text-xl" />
-            <span className="hidden sm:inline">Explore </span>
-            My Project
+            <GoProjectRoadmap className="text-lg md:text-xl" />
+            <div className="pl-2">
+              <span className="hidden sm:inline pr-1">Explore</span>
+              My Project
+            </div>
           </button>
           <Link
             href="https://github.com/weeranutCK"
@@ -59,7 +61,7 @@ export const Introduction: React.FC = () => {
                   : 'bg-[#2b2b2b] hover:bg-[#333333]'
               }`}
             >
-              <FaGithub className="text-xl" />
+              <FaGithub className="text-lg" />
               Visit My GitHub
             </button>
           </Link>
@@ -73,9 +75,9 @@ export const Introduction: React.FC = () => {
           src="/profile-image.jpeg"
           alt="weeranut's profile picture"
           className="rounded-full
-            w-[180px] h-[180px]
-            sm:w-[220px] sm:h-[220px]
-            md:w-[280px] md:h-[280px]
+            w-[200px] h-[200px]
+            sm:w-[190px] sm:h-[190px]
+            md:w-[200px] md:h-[200px]
             lg:w-[350px] lg:h-[350px]
             object-cover"
           width={350}

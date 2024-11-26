@@ -190,12 +190,30 @@ const ProjectsPage = () => {
     }));
   };
 
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    
+    if (newPage < currentPage) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth'
+        });
+      }, 100);
+    } else if (newPage > currentPage) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery, filters]);
 
   return (
-    <div className="flex flex-col justify-start items-center w-full min-h-[100svh] pb-5 md:pb-20">
+    <div className="flex flex-col justify-start items-center min-h-[100svh] w-full pb-5 md:pb-20">
       <div className="w-full h-full pt-24 md:pt-28 px-4 md:px-14 max-w-7xl">
         <div className="text-2xl md:text-3xl font-bold mb-8">Projects</div>
         <ProjectFilter
@@ -236,7 +254,7 @@ const ProjectsPage = () => {
             <div>Tech Stack</div>
             <div>Links</div>
           </div>
-          <div className="border-t border-gray-200 dark:border-gray-700 min-h-[120svh]">
+          <div className="border-t border-gray-200 dark:border-gray-700">
             {paginatedProjects.length === 0 ? (
               <div className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
                 No projects found matching your criteria
@@ -286,7 +304,7 @@ const ProjectsPage = () => {
           </div>
         </div>
 
-        <div className="md:hidden w-full min-h-[228svh]">
+        <div className="md:hidden w-full">
           {paginatedProjects.length === 0 ? (
             <div className="px-4 py-4 text-center text-gray-500 dark:text-gray-400">
               No projects found matching your criteria
@@ -340,7 +358,7 @@ const ProjectsPage = () => {
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={setCurrentPage}
+          onPageChange={handlePageChange}
         />
       </div>
     </div>
