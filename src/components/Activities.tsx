@@ -18,7 +18,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     if (!isHovered) {
       const timer = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % images.length);
-      }, 2000);
+      }, 1000);
       return () => clearInterval(timer);
     }
   }, [images.length, isHovered]);
