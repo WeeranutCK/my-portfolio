@@ -72,7 +72,7 @@ export const Introduction: React.FC = () => {
       </div>
       <div className="relative flex justify-center items-center">
         <Image
-          src="/profile-image.jpeg"
+          src="/profile-image.jpg"
           alt="weeranut's profile picture"
           className="rounded-full
             w-[200px] h-[200px]
