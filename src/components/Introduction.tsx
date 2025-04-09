@@ -34,20 +34,21 @@ export const Introduction: React.FC = () => {
           Interest in Web - Mobile Application Development and Machine Learning
         </div>
         <div className="flex gap-3 md:gap-5 text-xs md:text-sm lg:text-lg">
-          <button
-            onClick={() => {}}
-            className={`mt-4 px-4 py-3 text-white font-semibold rounded flex items-center ${
-              theme === 'dark'
-                ? 'bg-[#A91D3A] hover:bg-[#C73659]'
-                : 'bg-[#C73659] hover:bg-[#A91D3A]'
-            }`}
-          >
-            <GoProjectRoadmap className="text-lg md:text-xl" />
-            <div className="pl-2">
-              <span className="hidden sm:inline pr-1">Explore</span>
-              My Project
-            </div>
-          </button>
+          <Link href="/projects">
+            <button
+              className={`mt-4 px-4 py-3 text-white font-semibold rounded flex items-center ${
+                theme === 'dark'
+                  ? 'bg-[#A91D3A] hover:bg-[#C73659]'
+                  : 'bg-[#C73659] hover:bg-[#A91D3A]'
+              }`}
+            >
+              <GoProjectRoadmap className="text-lg md:text-xl" />
+              <div className="pl-2">
+                <span className="hidden sm:inline pr-1">Explore</span>
+                My Project
+              </div>
+            </button>
+          </Link>
           <Link
             href="https://github.com/weeranutCK"
             target="_blank"
@@ -57,7 +58,7 @@ export const Introduction: React.FC = () => {
             <button
               className={`mt-4 px-4 py-3 text-white font-semibold rounded flex items-center gap-2 ${
                 theme === 'light'
-                  ? 'bg-[#333333] hover:bg-[#2b2b2b]'
+                  ? 'bg-[#0c0b0b] hover:bg-[#2b2b2b]'
                   : 'bg-[#2b2b2b] hover:bg-[#333333]'
               }`}
             >
@@ -67,7 +68,7 @@ export const Introduction: React.FC = () => {
           </Link>
         </div>
         <div className="py-4 md:py-2 text-sm md:text-base">
-          Last Update: 23 Nov 2024 04:56 PM
+          Last Update: 4 Apr 2024 01:47 AM
         </div>
       </div>
       <div className="relative flex justify-center items-center">
