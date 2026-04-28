@@ -1,7 +1,6 @@
 'use client';
-import { createContext, useContext, useEffect, useState } from 'react';
-
-type Theme = 'light' | 'dark';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { buildThemeCookie, resolveThemePreference, Theme } from '@/lib/theme';
 
 interface ThemeContextType {
   theme: Theme;
@@ -10,39 +9,40 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-  const [theme, setTheme] = useState<Theme>(() => {
-    return 'dark';
-  });
+export function ThemeProvider({
+  children,
+  initialTheme = 'light',
+}: Readonly<{ children: React.ReactNode; initialTheme?: Theme }>) {
+  const [theme, setTheme] = useState<Theme>(initialTheme);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    setTheme(savedTheme || 'light');
-    setMounted(true);
+    const resolvedTheme = resolveThemePreference({
+      storedTheme: localStorage.getItem('theme'),
+      prefersDark: globalThis.matchMedia('(prefers-color-scheme: dark)').matches,
+    });
+
+    setTheme((currentTheme) => (currentTheme === resolvedTheme ? currentTheme : resolvedTheme));
   }, []);
 
   useEffect(() => {
-    if (mounted) {
-      localStorage.setItem('theme', theme);
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    }
-  }, [theme, mounted]);
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    localStorage.setItem('theme', theme);
+    document.cookie = buildThemeCookie(theme, globalThis.location.protocol === 'https:');
+  }, [theme]);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
-  if (!mounted) {
-    return null;
-  }
+  const contextValue = useMemo(
+    () => ({ theme, toggleTheme }),
+    [theme]
+  );
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   );

@@ -2,6 +2,50 @@ import { Activity } from "@/types/activity";
 
 const activityData: Activity[] = [
   {
+    name: "Bangkok Asia International Collegiate Programming Contest (Asia/Regional ICPC)",
+    description: "Competed as a Kasetsart University team in the Regional phase, tackling advanced algorithmic challenges in a highly competitive environment.",
+    date: "09 November 2025",
+    images: [
+      "/activities/icpc-2025-asia/icpc-2025-asia-1.jpg",
+      "/activities/icpc-2025-asia/icpc-2025-asia-2.jpg",
+      "/activities/icpc-2025-asia/icpc-2025-asia-3.jpg",
+    ],
+    imageCredit: {
+      name: "ACM ICPC Thailand",
+      link: "https://www.facebook.com/ACM.ICPC.Thailand",
+    },
+  },
+  {
+    name: "Thailand International Collegiate Programming Contest (Thai ICPC)",
+    description: "Competed as a Kasetsart University team, solving algorithmic challenges using C, C++, Python, Java, and Kotlin.",
+    date: "21 September 2025",
+    images: [
+      "/activities/icpc-2025-thailand/icpc-2025-thailand-1.jpg",
+      "/activities/icpc-2025-thailand/icpc-2025-thailand-2.jpg",
+    ],
+    imageCredit: {
+      name: "ACM ICPC Thailand",
+      link: "https://www.facebook.com/ACM.ICPC.Thailand",
+    },
+  },
+  {
+    name: "Software Engineer (Backend) Intern at SCB TECH X",
+    description: "Led backend feature development for the SCB Easy banking application and maintained Java microservices handling 10K+ daily transactions. Migrated systems to Java 21, resolving critical library issues, and leveraged AI tools (GitHub Copilot, ChatGPT, Claude, Gemini) to accelerate delivery within Agile sprints.",
+    date: "02 May - 30 September 2025",
+    images: [
+      "/activities/scbtechx/scbtechx-1.jpg",
+      "/activities/scbtechx/scbtechx-2.jpg",
+      "/activities/scbtechx/scbtechx-3.jpg",
+      "/activities/scbtechx/scbtechx-4.jpg",
+      "/activities/scbtechx/scbtechx-5.jpg",
+      "/activities/scbtechx/scbtechx-6.jpg",
+    ],
+    imageCredit: {
+      name: "SCB TECH X",
+      link: "https://scbtechx.io/",
+    },
+  },
+  {
     name: "Thailand International Collegiate Programming Contest (ICPC)",
     description: "Competed as a Kasetsart University team member (OKMaiWaa AoNgaiDWaa), solving algorithmic challenges using either C, C++, Python, Java, or Kotlin.",
     date: "08 September 2024",

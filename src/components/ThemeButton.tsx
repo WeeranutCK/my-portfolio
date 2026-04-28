@@ -1,33 +1,30 @@
 import { useTheme } from '@/context/ThemeContext';
+import { FiMoon, FiSun } from 'react-icons/fi';
 import React from 'react';
 
-export const ThemeToggle: React.FC = () => {
+export const ThemeToggle: React.FC<{ compact?: boolean }> = ({ compact = false }) => {
   const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
+  const buttonClasses = compact
+    ? 'group inline-flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white/80 p-0 text-slate-700 shadow-lg shadow-slate-900/5 backdrop-blur-xl hover:-translate-y-0.5 dark:border-slate-700/80 dark:bg-slate-900/90 dark:text-white dark:shadow-black/20'
+    : 'group inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/80 px-2 py-2 text-slate-700 shadow-lg shadow-slate-900/5 backdrop-blur-xl hover:-translate-y-0.5 dark:border-slate-700/80 dark:bg-slate-900/90 dark:text-white dark:shadow-black/20';
+  const iconClasses = isDark ? 'rounded-full bg-slate-100 p-2 text-slate-950' : 'rounded-full bg-slate-900 p-2 text-white';
 
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full"
+      type="button"
+      className={buttonClasses}
       aria-label="Toggle theme"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-6 h-6 dark:stroke-white"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d={
-            theme === 'light'
-              ? 'M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z'
-              : 'M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z'
-          }
-        />
-      </svg>
+      <span className={compact ? iconClasses.replace(' p-2', '') : iconClasses}>
+        {isDark ? <FiSun className="h-4 w-4" /> : <FiMoon className="h-4 w-4" />}
+      </span>
+      {!compact && (
+        <span className="pr-2 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-slate-500 dark:text-slate-200">
+          {isDark ? 'Black' : 'White'}
+        </span>
+      )}
     </button>
   );
 };

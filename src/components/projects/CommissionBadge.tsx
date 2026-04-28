@@ -9,13 +9,13 @@ interface CommissionBadgeProps {
 export const CommissionBadge = ({ commission }: CommissionBadgeProps) => {
   const getBadgeClasses = (isCommission: boolean | undefined) => {
     return isCommission
-      ? 'bg-purple-100 dark:bg-purple-900'
-      : 'bg-blue-100 dark:bg-blue-900';
+      ? 'bg-[hsl(var(--accent)/0.14)] text-[hsl(var(--accent))]'
+      : 'bg-[hsl(var(--primary)/0.12)] text-[hsl(var(--primary))]';
   };
 
   return (
     <div
-      className={`h-6 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${getBadgeClasses(
+      className={`inline-flex h-8 whitespace-nowrap items-center rounded-full border border-black/5 px-3 text-[0.62rem] font-semibold uppercase tracking-[0.14em] dark:border-white/10 ${getBadgeClasses(
         commission
       )}`}
     >

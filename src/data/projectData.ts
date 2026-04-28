@@ -2,14 +2,23 @@ import { Project } from "@/types/project";
 
 const projects: Project[] = [
   {
-    id: "project-5",
-    title: "Tournament Management Website v1.0",
-    shortDescription: "A website that can handle tournament registration and management.",
-    date: "June 2024 - Present",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-    githubUrl: "https://github.com/CS471-Tournament-Website/tournament-website-front",
-    figmaUrl: "https://www.figma.com/design/tr1VJ6IcltUhb0g93zwvSG/se-pages-design?node-id=187-2446&t=3qFctfA6s9AbpeDf-1",
-    status: "offline",
+    id: "project-6",
+    title: "Computer Science Senior Project - osu! Tournament Platform (1st Phase)",
+    shortDescription: "Leading full-stack development of a tournament management platform using Agile/Scrum. Architected and deployed infrastructure with Kubernetes, Traefik, and WireGuard VPN. Designed scalable real-time caching strategy using Redis and integrated modern AI models (GPT-5, Claude 4.5, Gemini 3.0) for enhanced platform features.",
+    date: "Oct 2025 - Mar 2026",
+    technologies: ["Next.js", "NestJS", "Prisma", "PostgreSQL", "Redis", "Kubernetes", "Docker", "Traefik", "WireGuard VPN", "GPT-5", "Claude Sonnet 4.5", "Claude Opus 4.5", "Gemini Pro 3.0", "Jest", "Playwright"],
+    presentationUrl: "https://drive.google.com/file/d/1BhmmCJH7Ej49njDw7fRFDfCYwB2ijYUS/view?usp=sharing",
+    reportUrl: "https://drive.google.com/file/d/135BROpxTRPe1-gQOwcgzYriTuH_aEyCQ/view?usp=sharing",
+    status: "online",
+  },
+  {
+    id: "project-scb-easy",
+    title: "SCB Easy Application - Backend Development (Internship)",
+    shortDescription: "Developed and maintained Java microservices for the SCB Easy banking application, handling 10K+ daily transactions. Contributed to microservices architecture and system migration to Java 21 within an enterprise banking environment.",
+    date: "May 2025 - Sep 2025",
+    technologies: ["Java", "Spring Boot", "Kubernetes", "Kafka", "RabbitMQ", "Redis", "JUnit", "Jira", "Confluence"],
+    reportUrl: "https://drive.google.com/file/d/1tFgmiZiA2Asz-OItiikgNwyEcQXjBx-d/view?usp=sharing",
+    status: "online",
   },
   {
     id: "project-4",

@@ -1,226 +1,222 @@
 'use client';
 
-import { useTheme } from '@/context/ThemeContext';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import { FiX } from 'react-icons/fi';
+import SafeExternalLink from '@/components/SafeExternalLink';
 import activityData from '@/data/activityData';
-import LoadingMiddleware from "@/middleware/LoadingMiddleware";
-import { useEffect, useState } from 'react';
+import { Pagination } from './projects/Pagination';
+import LoadingMiddleware from '@/middleware/LoadingMiddleware';
+import { Activity } from '@/types/activity';
+import { useUI } from '@/context/UIContext';
 
-interface Credit {
-  name: string;
-  link?: string;
-}
+const ITEMS_PER_PAGE = 4;
 
-const ImageCarousel = ({ images }: { images: string[] }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
+const getImagePreviewName = (imagePath: string) => imagePath.split('/').pop() ?? imagePath;
+
+const ImageCarousel = ({ images, onImageClick }: { images: string[], onImageClick: (img: string) => void }) => {
+  const [current, setCurrent] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const navigate = useCallback((index: number) => {
+    setCurrent(index);
+  }, []);
+
+  const startAutoplay = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    if (!images || images.length <= 1) return;
+    intervalRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 5000);
+  }, [images]);
 
   useEffect(() => {
-    if (!isHovered) {
-      const timer = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
-      }, 2500);
-      return () => clearInterval(timer);
-    }
-  }, [images.length, isHovered]);
+    startAutoplay();
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, [startAutoplay]);
 
-  const nextImage = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
+  if (!images || images.length === 0) return <div className="h-full w-full animate-pulse bg-[hsl(var(--muted))]" />;
 
   return (
-    <div
-      className="relative w-full h-56 overflow-hidden rounded-t-lg group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div
-        className="w-full h-full transition-transform duration-500 ease-in-out"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-        <div className="absolute top-0 left-0 w-full h-full flex">
-          {images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`Slide ${index + 1}`}
-              className="w-full h-full object-cover flex-shrink-0"
+    <div className="relative h-[280px] w-full overflow-hidden md:h-[320px]">
+      {/* All images stay mounted — transitions are pure CSS opacity/transform, no remount lag */}
+      {images.map((src, idx) => (
+        <div
+          key={src}
+          className="absolute inset-0"
+          style={{
+            opacity: idx === current ? 1 : 0,
+            transform: idx === current ? 'scale(1)' : 'scale(1.03)',
+            transition: 'opacity 700ms cubic-bezier(0.4,0,0.2,1), transform 700ms cubic-bezier(0.4,0,0.2,1)',
+            pointerEvents: idx === current ? 'auto' : 'none',
+          }}
+        >
+          <Image
+            src={src}
+            alt="activity"
+            fill
+            className="cursor-pointer object-cover"
+            onClick={() => onImageClick(src)}
+          />
+        </div>
+      ))}
+      {images.length > 1 && (
+        <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2 rounded-full border border-white/20 bg-black/30 px-3 py-2 backdrop-blur-xl">
+          {images.map((image, imageIndex) => (
+            <button
+              key={`${image}-${imageIndex}`}
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(imageIndex);
+                startAutoplay();
+              }}
+              className={`h-2 rounded-full transition-all duration-500 ${
+                current === imageIndex ? 'w-6 bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]' : 'w-2 bg-white/40 hover:bg-white/60'
+              }`}
             />
           ))}
         </div>
-      </div>
-      <div className="absolute inset-0 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            prevImage();
-          }}
-          className="p-2 m-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 19.5L8.25 12l7.5-7.5"
-            />
-          </svg>
-        </button>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            nextImage();
-          }}
-          className="p-2 m-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            />
-          </svg>
-        </button>
-      </div>
-      <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-2">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              currentIndex === index
-                ? 'bg-white'
-                : 'bg-white/50 hover:bg-white/75'
-            }`}
-          />
-        ))}
-      </div>
+      )}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
     </div>
   );
 };
 
-const ImageCredit = ({ credit }: { credit: Credit }) => {
-  const { theme } = useTheme();
-
-  return (
-    <div className="flex justify-end mt-auto text-right">
-      <span
-        className={`text-xs italic ${
-          theme === 'light' ? 'text-gray-500' : 'text-gray-400'
-        }`}
-      >
-        Images by:{' '}
-        {credit.link ? (
-          <a
-            href={credit.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`hover:underline ${
-              theme === 'light'
-                ? 'text-blue-600 hover:text-blue-700'
-                : 'text-blue-400 hover:text-blue-300'
-            }`}
-          >
-            {credit.name}
-          </a>
-        ) : (
-          credit.name
-        )}
-      </span>
-    </div>
+const ImageCredit = ({ credit }: { credit?: { name: string; link?: string } }) => {
+  if (!credit) return null;
+  const content = (
+    <span className="text-[10px] opacity-40 hover:opacity-100 transition-opacity font-bold uppercase tracking-[0.2em] text-white dark:text-gray-400">
+      Photo: {credit.name}
+    </span>
   );
+
+  if (credit.link) {
+    return (
+      <SafeExternalLink href={credit.link} className="z-10">
+        {content}
+      </SafeExternalLink>
+    );
+  }
+
+  return content;
 };
 
 const Activities = () => {
-  const { theme } = useTheme();
-  const [isLoading, setIsLoading] = useState(false);
-  const [visibleActivities, setVisibleActivities] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const { setNavbarVisible } = useUI();
 
-  const triggerLoading = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      loadMoreActivities();
-      setIsLoading(false);
-    }, 2000);
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, []);
 
-  const loadMoreActivities = () => {
-    setVisibleActivities((prev) => prev + 2);
-  };
+  useEffect(() => {
+    document.body.style.overflow = selectedImage ? 'hidden' : '';
+    setNavbarVisible(!selectedImage);
+
+    return () => {
+      document.body.style.overflow = '';
+      setNavbarVisible(true);
+    };
+  }, [selectedImage, setNavbarVisible]);
+
+  const totalPages = Math.ceil(activityData.length / ITEMS_PER_PAGE);
+  const paginatedActivities = activityData.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   return (
     <LoadingMiddleware isLoading={isLoading}>
-      <div
-        className={`w-full h-1/2 p-8 md:pt-14 md:px-14 ${
-          theme === 'light' ? 'bg-[#FAF9F6]' : 'bg-[#1c1c1c]'
-        }`}
-      >
-        <div className="max-w-[1400px] mx-auto h-full flex flex-col">
-          <div className="text-lg md:text-xl lg:text-2xl font-bold mb-8">
-            Recent Activities
+      <section id="activities" className="section-shell w-full px-6 py-20 md:px-10 md:py-24 lg:px-14">
+        <div className="mx-auto max-w-7xl">
+          <div className="section-heading mb-14 animate-fade-in-up space-y-6">
+            <div className="eyebrow">Timeline</div>
+            <h2 className="text-slate-950 dark:text-white">Recent activities, leadership, and community highlights.</h2>
+            <p className="max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300 md:text-lg">
+              A snapshot of hackathons, technical communities, and initiatives that shaped how I build, collaborate, and lead.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6">
-            {activityData.slice(0, visibleActivities).map((activity, index) => (
-              <div
-                key={index}
-                className={`flex flex-col h-[400px] rounded-lg transition-all duration-300 ${
-                  theme === 'light'
-                    ? 'bg-white shadow-md hover:shadow-lg'
-                    : 'bg-[#2d2d2d] shadow-dark hover:shadow-lg'
-                }`}
-              >
-                <ImageCarousel images={activity.images} />
-                <div className="flex flex-col flex-grow p-4">
-                  <h3 className="font-medium text-lg md:text-xl line-clamp-3 md:line-clamp-2 mb-2">
-                    {activity.name}
-                  </h3>
-                  <p
-                    className={`text-xs sm:text-sm line-clamp-4 mb-2 ${
-                      theme === 'light' ? 'text-gray-600' : 'text-gray-400'
-                    }`}
-                  >
-                    {activity.description}
-                  </p>
-                  <div className="mt-auto">
-                    <span
-                      className={`block text-xs sm:text-sm text-right mb-1 ${
-                        theme === 'light' ? 'text-gray-600' : 'text-gray-400'
-                      }`}
-                    >
-                      {activity.date}
-                    </span>
-                    <ImageCredit credit={activity.imageCredit} />
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {paginatedActivities.map((activity: Activity) => {
+              const animationOrder = activityData.findIndex(
+                (item) => item.name === activity.name && item.date === activity.date
+              );
+
+              return (
+                <article
+                  key={`${activity.name}-${activity.date}`}
+                  className="modern-card animate-fade-in-up overflow-hidden"
+                  style={{ animationDelay: `${animationOrder * 120}ms` }}
+                >
+                  <ImageCarousel images={activity.images} onImageClick={setSelectedImage} />
+                  <div className="space-y-6 p-7 md:p-8">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="rounded-full bg-[hsl(var(--primary)/0.12)] px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[hsl(var(--primary))]">
+                        {activity.date}
+                      </span>
+                      <div className="h-2.5 w-2.5 rounded-full bg-[hsl(var(--accent))] opacity-80" />
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="text-[1.55rem] font-semibold leading-tight text-slate-950 dark:text-white md:text-[1.75rem]">
+                        {activity.name}
+                      </h3>
+                      <p className="text-[0.98rem] leading-8 text-slate-600 dark:text-slate-300">
+                        {activity.description}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-4 border-t border-black/5 pt-5 dark:border-white/10">
+                      <ImageCredit credit={activity.imageCredit} />
+                      <button
+                        type="button"
+                        onClick={() => setSelectedImage(activity.images[0])}
+                        className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-slate-500 hover:text-[hsl(var(--primary))] dark:text-slate-400"
+                      >
+                        Open image
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                </article>
+              );
+            })}
           </div>
-          {visibleActivities < activityData.length && (
-            <button
-              onClick={triggerLoading}
-              className="px-4 py-2 mx-auto bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Load More
-            </button>
-          )}
+
+          <div className="mt-16 border-t border-black/5 pt-10 dark:border-white/10">
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+          </div>
         </div>
-      </div>
+
+        {selectedImage && (
+          <div className="fixed inset-0 z-[140] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-lg md:p-6">
+            <button
+              type="button"
+              className="absolute inset-0 z-0"
+              aria-label="Close image preview"
+              onClick={() => setSelectedImage(null)}
+            />
+            <div className="relative z-10 h-full w-full max-w-6xl rounded-[28px] border border-white/10 bg-black/20 p-4 md:p-6">
+              <Image src={selectedImage} alt="Selected activity" fill className="object-contain" />
+              <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-slate-950/80 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-200 md:left-6 md:top-6">
+                {getImagePreviewName(selectedImage)}
+              </div>
+              <button
+                type="button"
+                className="absolute right-4 top-4 z-20 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-slate-950/85 text-white shadow-lg md:right-6 md:top-6"
+                aria-label="Close image preview"
+                onClick={() => setSelectedImage(null)}
+              >
+                <FiX className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        )}
+      </section>
     </LoadingMiddleware>
   );
 };

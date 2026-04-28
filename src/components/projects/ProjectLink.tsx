@@ -1,8 +1,9 @@
 'use client';
 
+import SafeExternalLink from '@/components/SafeExternalLink';
 import { Project } from '@/types/project';
-import Link from 'next/link';
-import { FiExternalLink, FiFigma, FiGithub } from 'react-icons/fi';
+import { getSafeHref } from '@/services/linkSecurity';
+import { FiExternalLink, FiFigma, FiFileText, FiGithub } from 'react-icons/fi';
 
 export const ProjectLink = ({ project }: { project: Project }) => {
   const links = [
@@ -26,22 +27,26 @@ export const ProjectLink = ({ project }: { project: Project }) => {
       Icon: FiExternalLink,
       label: 'Presentation',
     },
+    {
+      url: project.reportUrl,
+      Icon: FiFileText,
+      label: 'Report',
+    },
   ];
 
   return (
-    <div className="grid grid-cols-3 md:flex md:flex-col gap-2 pt-1">
+    <div className="flex flex-wrap items-center justify-start gap-2 xl:justify-end">
       {links.map(
         ({ url, Icon, label }) =>
-          url && (
-            <Link
+          getSafeHref(url) && (
+            <SafeExternalLink
               key={label}
-              href={url}
-              target="_blank"
-              className="flex items-center gap-2 text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+              href={url!}
+              className="inline-flex h-8 items-center gap-2 whitespace-nowrap rounded-full border border-black/10 bg-white/70 px-3 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200"
             >
-              <Icon size={18} />
-              <span className="text-sm">{label}</span>
-            </Link>
+              <Icon size={14} />
+              <span>{label}</span>
+            </SafeExternalLink>
           )
       )}
     </div>

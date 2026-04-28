@@ -28,31 +28,34 @@ export const Pagination = ({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex justify-center items-center gap-2 mt-6">
+    <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
       <button
+        type="button"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-3 py-1 rounded-md border dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 dark:hover:bg-gray-800"
+        className="rounded-full border border-black/10 px-4 py-2 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:text-slate-200"
       >
         Previous
       </button>
       {getPageNumbers().map((page) => (
         <button
           key={page}
+          type="button"
           onClick={() => onPageChange(page)}
-          className={`px-3 py-1 rounded-md border dark:border-gray-700 ${
+          className={`rounded-full border px-4 py-2 text-sm font-semibold ${
             currentPage === page
-              ? 'bg-blue-600 text-white dark:bg-blue-500'
-              : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+              ? 'border-transparent bg-[hsl(var(--primary))] text-white shadow-lg shadow-blue-500/20'
+              : 'border-black/10 text-slate-700 dark:border-white/10 dark:text-slate-200'
           }`}
         >
           {page}
         </button>
       ))}
       <button
+        type="button"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-3 py-1 rounded-md border dark:border-gray-700 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100 dark:hover:bg-gray-800"
+        className="rounded-full border border-black/10 px-4 py-2 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:text-slate-200"
       >
         Next
       </button>

@@ -1,19 +1,11 @@
-import { useTheme } from '@/context/ThemeContext';
-
 const Footer = () => {
-  const { theme } = useTheme();
-
   return (
-    <footer
-      className={`py-6 ${
-        theme === 'light' ? 'bg-gray-200/30' : 'bg-white/5 text-white'
-      }`}
-    >
-      <div className="container mx-auto text-center px-5 text-sm md:text-base">
+    <footer className="relative z-10 w-full px-6 pb-8 pt-2 md:px-10 lg:px-14">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 rounded-[28px] border border-black/10 bg-white/72 px-6 py-5 text-sm text-slate-500 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-400 md:flex-row md:items-center md:justify-between">
         <p>
-          v1.0.0 <span className="px-1">|</span> &copy; 2023 Weeranut Portfolio.
-          All rights reserved.
+          © 2026 Weeranut Chayakul · Designed with white/black theme support.
         </p>
+        <p className="font-medium uppercase tracking-[0.24em]">Portfolio v2</p>
       </div>
     </footer>
   );

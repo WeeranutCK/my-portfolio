@@ -8,6 +8,7 @@ export interface Project {
   liveUrl?: string;
   figmaUrl?: string;
   presentationUrl?: string;
+  reportUrl?: string;
   commission?: boolean;
   status?: 'online' | 'offline' | 'down';
 }
